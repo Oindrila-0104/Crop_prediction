@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Prediction</title>
+    <style>
+        body {
+            background-image: url('static/img3.jpg');
+            background-size: cover;   
+            background-position: center;  
+            background-repeat: no-repeat;  
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #9bcdc8;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%; 
+            margin: 50px auto;
+            padding: 40px; 
+            background: rgba(255, 255, 255, 0.5); 
+            border-radius: 10px;
+            border-radius: rgba(24, 193, 193, 0.548); 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            backdrop-filter: blur(10px); 
+            border: 5px solid #ddd; 
+        }
+
+        h1 {
+            text-align: center;
+            color: #024e50; 
+            font-size: 40px; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            margin-bottom: 20px; 
+            letter-spacing: 1px; 
+            font-family: 'Arial', sans-serif; 
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px 20px; 
+            font-size: 20px; 
+            color: rgba(121, 233, 171, 0.721);
+            background-color: #054653; 
+            border: none;
+            border-radius: 8px; 
+            cursor: pointer;
+            transition: all 0.3s ease-in-out; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-weight: bolder; 
+            font-size: 30px;
+            letter-spacing: 1px;
+            font-family: Arial, sans-serif;
+        }
+
+        button:hover {
+            background-color: rgba(10, 90, 93, 0.7); 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);  
+        }
+
+        button:focus {
+            outline: none; 
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.5); 
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px; 
+            background-color: rgba(76, 175, 80, 0.2); 
+            border-radius: 8px; 
+            text-align: center;
+            font-size: 20px;
+            color: #011e0d;
+            font-weight: bolder; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            border: 1px solid rgba(76, 175, 80, 0.4); 
+            transition: all 0.3s ease-in-out;
+            font-style: italic; 
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;  
+                padding: 20px;   
+            }
+
+            h1 {
+            font-size: 24px;  
+            }
+
+            button {
+            font-size: 18px;  
+            }
+
+            input {
+            font-size: 14px;  
+            }
+        }
+
+        
+        @media (max-width: 480px) {
+            .container {
+                max-width: 95%;  
+                padding: 15px;   
+            }
+
+            h1 {
+                font-size: 20px;  
+            }
+
+            button {
+                font-size: 16px;  
+                padding: 10px 18px; 
+            }
+
+            input {
+                font-size: 12px;  
+            }
+
+            .result {
+                font-size: 16px;  
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Crop Prediction</h1>
+        <form action="/predict" method="post">
+            
+            <label for="N">NITROGEN:</label>
+            <input type="number" step="any" name="N" id="N" required>
+
+            <label for="P">PHOSPHORUS:</label>
+            <input type="number" step="any" name="P" id="P" required>
+
+            <label for="K">POTASSIUM:</label>
+            <input type="number" step="any" name="K" id="K" required>
+
+            <label for="temperature">TEMPERATURE:</label>
+            <input type="number" step="any" name="temperature" id="temperature" required>
+
+            <label for="humidity">HUMIDITY:</label>
+            <input type="number" step="any" name="humidity" id="humidity" required>
+
+            <label for="ph">pH:</label>
+            <input type="number" step="any" name="ph" id="ph" required>
+
+            <label for="rainfall">RAINFALL:</label>
+            <input type="number" step="any" name="rainfall" id="rainfall" required>
+
+            <button type="submit">PREDICT</button>
+        </form>
+        {% if prediction %}
+        <div class="result">
+            <strong>Prediction:</strong> {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
